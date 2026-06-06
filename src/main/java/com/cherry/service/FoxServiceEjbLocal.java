@@ -12,4 +12,11 @@ public interface FoxServiceEjbLocal {
      * @return List of Fox
      */
     List<Fox> getAllFoxes();
+
+    /**
+     * Returns a Fox
+     * @param id id of a Fox
+     * @return Fox object
+     */
+    Fox getFoxById(int id);
 }

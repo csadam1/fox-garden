@@ -4,10 +4,7 @@ import com.cherry.model.entity.Fox;
 import com.cherry.service.FoxServiceEjbLocal;
 
 import javax.ejb.EJB;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -23,5 +20,11 @@ public class FoxController {
     @Path("/all")
     public List<Fox> getAllFoxes() {
         return foxServiceEjb.getAllFoxes();
+    }
+
+    @GET
+    @Path("/{id}")
+    public Fox getFoxById(@PathParam("id") final int id) {
+        return foxServiceEjb.getFoxById(id);
     }
 }
