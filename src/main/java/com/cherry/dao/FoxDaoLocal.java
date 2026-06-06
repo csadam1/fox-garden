@@ -8,6 +8,7 @@ import java.util.Optional;
 
 @Local
 public interface FoxDaoLocal {
+
     /**
      * Queries all Foxes from the database
      * @return List of Foxes
@@ -20,4 +21,11 @@ public interface FoxDaoLocal {
      * @return Fox object
      */
     Optional<Fox> findById(int id);
+
+    /**
+     * Persists a Fox object in the database
+     * @param fox Fox to be stored
+     * @return the currently stored Fox
+     */
+    Fox save(Fox fox);
 }

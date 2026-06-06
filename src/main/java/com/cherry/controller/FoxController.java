@@ -1,14 +1,19 @@
 package com.cherry.controller;
 
+import com.cherry.model.request.CreateFoxRequest;
 import com.cherry.model.entity.Fox;
 import com.cherry.service.FoxServiceEjbLocal;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/fox")
+@RequestScoped
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class FoxController {
@@ -26,5 +31,15 @@ public class FoxController {
     @Path("/{id}")
     public Fox getFoxById(@PathParam("id") final int id) {
         return foxServiceEjb.getFoxById(id);
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createFox(@Valid final CreateFoxRequest request) {
+        Fox created = foxServiceEjb.createFox(request);
+        return Response.status(Response.Status.CREATED)
+                .entity(created)
+                .build();
     }
 }

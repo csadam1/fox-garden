@@ -1,9 +1,7 @@
 package com.cherry.model.entity;
 
 import com.cherry.model.enumerate.Gender;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,10 +9,13 @@ import javax.persistence.*;
 @Table(name = "Fox")
 @Getter
 @Setter
-@RequiredArgsConstructor
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Fox {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fox_seq")
+    @SequenceGenerator(name = "fox_seq", sequenceName = "fox_seq")
     @Column(nullable = false)
     private Long id;
 

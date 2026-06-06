@@ -1,4 +1,6 @@
-package com.cherry.exception;
+package com.cherry.provider;
+
+import com.cherry.exception.ApiException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
