@@ -6,25 +6,27 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Provider
 public class ValidationExceptionMapper implements ExceptionMapper<ConstraintViolationException> {
 
+    private static final String ERRORS_PROPERTY = "errors";
+
     @Override
     public Response toResponse(ConstraintViolationException exception) {
-        List<String> errorMessages = new ArrayList<>();
-        for (ConstraintViolation<?> violation : exception.getConstraintViolations()) {
-            errorMessages.add(violation.getMessage());
-        }
+        List<String> errorMessages = exception.getConstraintViolations()
+                .stream()
+                .map(ConstraintViolation::getMessage)
+                .collect(Collectors.toList());
 
         Map<String, List<String>> responseBody = new HashMap<>();
-        responseBody.put("errors", errorMessages);
+        responseBody.put(ERRORS_PROPERTY, errorMessages);
 
-        return Response.status(400)
+        return Response.status(Response.Status.BAD_REQUEST.getStatusCode())
                 .type(MediaType.APPLICATION_JSON)
                 .entity(responseBody)
                 .build();
