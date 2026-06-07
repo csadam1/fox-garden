@@ -23,6 +23,11 @@ public interface FoxDaoLocal {
     Optional<Fox> findById(int id);
 
     /**
+     * Finds one Fox which has no image (null or empty). Returns an Optional of any matching fox.
+     */
+    Optional<Fox> findOneWithEmptyImage();
+
+    /**
      * Persists a Fox object in the database
      * @param fox Fox to be stored
      * @return the currently stored Fox

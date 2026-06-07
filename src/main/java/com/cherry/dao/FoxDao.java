@@ -29,6 +29,16 @@ public class FoxDao implements FoxDaoLocal {
 
     @Override
     @TransactionAttribute
+    public Optional<Fox> findOneWithEmptyImage() {
+        List<Fox> list = entityManager.createQuery(
+                "SELECT f FROM Fox f WHERE f.image IS NULL OR f.image = ''", Fox.class)
+                .setMaxResults(1)
+                .getResultList();
+        return list.isEmpty() ? Optional.empty() : Optional.of(list.get(0));
+    }
+
+    @Override
+    @TransactionAttribute
     public Fox save(Fox fox) {
         return entityManager.merge(fox);
     }
