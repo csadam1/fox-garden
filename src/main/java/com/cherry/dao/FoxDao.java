@@ -32,4 +32,10 @@ public class FoxDao implements FoxDaoLocal {
     public Fox save(Fox fox) {
         return entityManager.merge(fox);
     }
+
+    @Override
+    @TransactionAttribute
+    public void delete(Fox fox) {
+        entityManager.remove(fox);
+    }
 }

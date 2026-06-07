@@ -28,4 +28,10 @@ public interface FoxDaoLocal {
      * @return the currently stored Fox
      */
     Fox save(Fox fox);
+
+    /**
+     * Deletes a Fox object from the database
+     * @param fox the Fox to be deleted
+     */
+    void delete(Fox fox);
 }

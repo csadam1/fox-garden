@@ -37,6 +37,13 @@ public class FoxServiceEjb implements FoxServiceEjbLocal {
         return foxDao.save(fox);
     }
 
+    @Override
+    @TransactionAttribute
+    public void deleteFoxById(int id) {
+        Fox fox = getFoxById(id);
+        foxDao.delete(fox);
+    }
+
     private Fox mapRequestToFox(final CreateFoxRequest request) {
         return Fox.builder()
                 .name(request.getName())

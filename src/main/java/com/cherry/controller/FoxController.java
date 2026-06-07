@@ -42,4 +42,11 @@ public class FoxController {
                 .entity(created)
                 .build();
     }
+
+    @DELETE
+    @Path("/{id}")
+    public Response deleteFoxById(@PathParam("id") final int id) {
+        foxServiceEjb.deleteFoxById(id);
+        return Response.status(Response.Status.NO_CONTENT).build();
+    }
 }

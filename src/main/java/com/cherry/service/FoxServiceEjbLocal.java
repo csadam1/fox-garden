@@ -28,4 +28,10 @@ public interface FoxServiceEjbLocal {
      * @return the created Fox
      */
     Fox createFox(CreateFoxRequest request);
+
+    /**
+     * Deletes a Fox from the database
+     * @param id id of the Fox
+     */
+    void deleteFoxById(int id);
 }
