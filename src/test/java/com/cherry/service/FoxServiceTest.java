@@ -23,8 +23,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class FoxServiceTest {
 
-    private static final int ID = 1;
-    private static final long ID_LONG = 1L;
+    private static final long ID = 1L;
+    private static final int ID_INT = 1;
     private static final String IMAGE = "http:google.com/image";
     private static final Gender MALE = Gender.MALE;
     private static final String SPECIES = "Red Fox";
@@ -56,7 +56,7 @@ public class FoxServiceTest {
         when(foxDao.findById(ID)).thenReturn(Optional.of(fox));
 
         // When
-        Fox result = foxServiceEjb.getFoxById(ID);
+        Fox result = foxServiceEjb.getFoxById(ID_INT);
 
         // Then
         assertEquals(fox, result);
@@ -68,7 +68,7 @@ public class FoxServiceTest {
         when(foxDao.findById(ID)).thenReturn(Optional.empty());
 
         // When
-        FoxNotFoundException exception = assertThrows(FoxNotFoundException.class, () -> foxServiceEjb.getFoxById(ID));
+        FoxNotFoundException exception = assertThrows(FoxNotFoundException.class, () -> foxServiceEjb.getFoxById(ID_INT));
 
         // Then
         FoxNotFoundException foxNotFoundException = new FoxNotFoundException(ID);
@@ -98,7 +98,7 @@ public class FoxServiceTest {
         when(foxDao.findById(ID)).thenReturn(Optional.of(fox));
 
         // When
-        foxServiceEjb.deleteFoxById(ID);
+        foxServiceEjb.deleteFoxById(ID_INT);
 
         // Then
         verify(foxDao).delete(any(Fox.class));
@@ -110,7 +110,7 @@ public class FoxServiceTest {
 
     private Fox getFox() {
         return Fox.builder()
-                .id(ID_LONG)
+                .id(ID)
                 .name(NAME)
                 .species(SPECIES)
                 .gender(MALE)

@@ -1,0 +1,10 @@
+FROM tomee:8.0.16-microprofile
+
+# Deploy WAR into TomEE
+COPY target/jakartaee8-starter.war /usr/local/tomee/webapps/jakartaee8-starter.war
+
+# Expose TomEE default port
+EXPOSE 8082
+
+# Start TomEE
+CMD ["catalina.sh", "run"]

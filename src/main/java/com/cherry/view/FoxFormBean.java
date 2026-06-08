@@ -23,7 +23,7 @@ public class FoxFormBean {
 
     private static final String FOX_CREATED_SUCCESSFULLY_WITH_ID_MESSAGE = "Fox created successfully with ID: {0}";
     private static final String ERROR_CREATING_FOX_MESSAGE = "Error creating fox";
-    private static final String FOX_CREATION_SUCCESS_URL = "index.xhtml?success=true";
+    private static final String FOX_CREATION_SUCCESS_URL = "index.jsf?success=true";
 
     private static final Logger logger = Logger.getLogger(FoxFormBean.class.getName());
 
@@ -38,7 +38,7 @@ public class FoxFormBean {
     private String gender;
     private String image;
 
-    public void createFox() {
+    public String createFox() {
         try {
             CreateFoxRequest request = new CreateFoxRequest();
             request.setName(name);
@@ -52,12 +52,12 @@ public class FoxFormBean {
 
             clearForm();
 
-            FacesContext.getCurrentInstance().getExternalContext()
-                    .redirect(FOX_CREATION_SUCCESS_URL);
+            return FOX_CREATION_SUCCESS_URL;
         } catch (Exception e) {
             logger.log(Level.SEVERE, ERROR_CREATING_FOX_MESSAGE, e);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(ERROR_CREATING_FOX_MESSAGE + ": " + e.getMessage()));
+            return null;
         }
     }
 

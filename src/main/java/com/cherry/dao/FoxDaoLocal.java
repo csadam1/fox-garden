@@ -20,7 +20,7 @@ public interface FoxDaoLocal {
      * @param id id of Fox
      * @return Fox object
      */
-    Optional<Fox> findById(int id);
+    Optional<Fox> findById(Long id);
 
     /**
      * Finds one Fox which has no image (null or empty). Returns an Optional of any matching fox.

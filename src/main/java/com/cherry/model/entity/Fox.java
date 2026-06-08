@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Fox {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fox_seq")
-    @SequenceGenerator(name = "fox_seq", sequenceName = "fox_seq")
+    @SequenceGenerator(name = "fox_seq", sequenceName = "fox_seq", allocationSize = 1)
     @Column(nullable = false)
     private Long id;
 

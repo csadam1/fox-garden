@@ -23,7 +23,7 @@ public class FoxDao implements FoxDaoLocal {
 
     @Override
     @TransactionAttribute
-    public Optional<Fox> findById(int id) {
+    public Optional<Fox> findById(Long id) {
         return Optional.ofNullable(entityManager.find(Fox.class, id));
     }
 
