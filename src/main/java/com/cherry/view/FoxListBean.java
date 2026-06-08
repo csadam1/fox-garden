@@ -8,7 +8,7 @@ import lombok.Setter;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 @Getter
 @Setter
 @Named("foxListBean")
-@ViewScoped
+@SessionScoped
 public class FoxListBean implements Serializable {
     private static final long serialVersionUID = 1L;
 

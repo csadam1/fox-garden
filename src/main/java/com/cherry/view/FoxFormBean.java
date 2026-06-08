@@ -23,7 +23,7 @@ public class FoxFormBean {
 
     private static final String FOX_CREATED_SUCCESSFULLY_WITH_ID_MESSAGE = "Fox created successfully with ID: {0}";
     private static final String ERROR_CREATING_FOX_MESSAGE = "Error creating fox";
-    private static final String FOX_CREATION_SUCCESS_URL = "index.jsf?success=true";
+    private static final String FOX_CREATION_SUCCESS_URL = "index?faces-redirect=true";
 
     private static final Logger logger = Logger.getLogger(FoxFormBean.class.getName());
 
