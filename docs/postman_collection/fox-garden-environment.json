@@ -1,0 +1,31 @@
+{
+  "name": "fox-garden",
+  "variables": [
+    {
+      "name": "port_wf",
+      "value": "8080",
+      "type": "text",
+      "enabled": true,
+      "secret": false
+    },
+    {
+      "name": "port_tomee",
+      "value": "8081",
+      "type": "text",
+      "enabled": true,
+      "secret": false
+    },
+    {
+      "name": "port_tomee_micro",
+      "value": "8082",
+      "type": "text",
+      "enabled": true,
+      "secret": false
+    }
+  ],
+  "info": {
+    "type": "bruno-environment",
+    "exportedAt": "2026-06-09T18:55:45.732Z",
+    "exportedUsing": "Bruno/v3.4.2"
+  }
+}
