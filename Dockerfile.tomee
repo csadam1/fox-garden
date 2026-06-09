@@ -1,5 +1,11 @@
 FROM tomee:8.0.16-webprofile
 
+# Add H2 driver to TomEE
+ADD https://repo1.maven.org/maven2/com/h2database/h2/2.4.240/h2-2.4.240.jar /usr/local/tomee/lib/
+
+# Copy TomEE datasource configuration
+COPY config/tomee.xml /usr/local/tomee/conf/tomee.xml
+
 # Deploy WAR into TomEE
 COPY target/jakartaee8-starter.war /usr/local/tomee/webapps/jakartaee8-starter.war
 

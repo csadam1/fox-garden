@@ -1,6 +1,15 @@
 FROM jboss/wildfly:25.0.0.Final
 
-# Deploy your WAR into WildFly
+# Copy CLI script into the image
+COPY config/wildfly-h2.cli /opt/jboss/wildfly/
+
+# Run CLI script to configure H2 datasource
+RUN /opt/jboss/wildfly/bin/jboss-cli.sh --file=/opt/jboss/wildfly/wildfly-h2.cli
+
+# Remove standalone_xml_history to avoid "Failed to parse XML file" error
+RUN rm -rf /opt/jboss/wildfly/standalone/configuration/standalone_xml_history
+
+# Deploy WAR into WildFly
 COPY target/jakartaee8-starter.war /opt/jboss/wildfly/standalone/deployments/jakartaee8-starter.war
 
 # Expose WildFly default port
