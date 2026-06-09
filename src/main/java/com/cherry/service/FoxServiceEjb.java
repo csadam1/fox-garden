@@ -26,7 +26,7 @@ public class FoxServiceEjb implements FoxServiceEjbLocal {
     @Override
     @TransactionAttribute
     public Fox getFoxById(final int id) {
-        return foxDao.findById(id)
+        return foxDao.findById((long) id)
                 .orElseThrow(() -> new FoxNotFoundException(id));
     }
 
