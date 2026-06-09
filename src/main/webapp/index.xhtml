@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Fox Garden - Manage Foxes</title>
+    <h:outputStylesheet name="css/style.css" library="resources"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #e8a742;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .messages {
+            margin-bottom: 20px;
+        }
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 4px;
+            border: 1px solid #c3e6cb;
+        }
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 12px;
+            border-radius: 4px;
+            border: 1px solid #f5c6cb;
+        }
+        .form-section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #e9ecef;
+        }
+        .form-section h2 {
+            color: #e8a742;
+            margin-top: 0;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input[type="text"],
+        select,
+        textarea {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        textarea {
+            min-height: 100px;
+            font-family: monospace;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 15px;
+        }
+        .datatable-section {
+            margin-top: 40px;
+        }
+        .datatable-section h2 {
+            color: #e8a742;
+            margin-bottom: 15px;
+        }
+        .image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+    </style>
+</h:head>
+<h:body>
+    <div class="container">
+        <h1>🦊 Fox Garden</h1>
+
+        <f:view>
+            <!-- Success/Error Messages -->
+            <h:panelGroup rendered="#{not empty foxListBean.successMessage}">
+                <div class="success-message">#{foxListBean.successMessage}</div>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{not empty foxListBean.errorMessage}">
+                <div class="error-message">#{foxListBean.errorMessage}</div>
+            </h:panelGroup>
+
+            <!-- Create Fox Form -->
+            <div class="form-section">
+                <h2>Add New Fox</h2>
+                <h:form id="foxForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name: <span style="color: red;">*</span></label>
+                            <h:inputText id="name" value="#{foxFormBean.name}" required="true"
+                                         requiredMessage="Name is required"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="species">Species: <span style="color: red;">*</span></label>
+                            <h:inputText id="species" value="#{foxFormBean.species}" required="true"
+                                         requiredMessage="Species is required"/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="gender">Gender: <span style="color: red;">*</span></label>
+                            <h:selectOneMenu id="gender" value="#{foxFormBean.gender}" required="true"
+                                             requiredMessage="Gender is required">
+                                <f:selectItem itemValue="" itemLabel="-- Select Gender --"/>
+                                <f:selectItem itemValue="MALE" itemLabel="Male"/>
+                                <f:selectItem itemValue="FEMALE" itemLabel="Female"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Image URL:</label>
+                            <h:inputText id="image" value="#{foxFormBean.image}"
+                                         placeholder="Enter image URL or base64 data"/>
+                        </div>
+                    </div>
+                    <div class="form-row full">
+                        <div class="button-group" style="justify-content: flex-start;">
+                            <p:commandButton value="Create Fox"
+                                             action="#{foxFormBean.createFox}"
+                                             update="foxForm"
+                                             process="@form"
+                                             styleClass="btn btn-primary"/>
+                            <h:commandButton value="Clear" type="reset" styleClass="btn btn-secondary"/>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+
+            <!-- Foxes List Table -->
+            <div class="datatable-section">
+                <h2>All Foxes</h2>
+
+                <h:panelGroup rendered="#{empty foxListBean.foxes}">
+                    <div class="no-data">No foxes found. Create one to get started!</div>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{not empty foxListBean.foxes}">
+                    <h:form id="foxesTable">
+                        <p:dataTable id="foxTable" var="fox" value="#{foxListBean.foxes}"
+                                     paginator="true" rows="10"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15,20"
+                                     style="width: 100%"
+                                     scrollable="true"
+                                     resizableColumns="true"
+                                     reflow="true"
+                                     sortBy="#{fox.name}"
+                                     sortOrder="ascending"
+                                     filterBy="#{fox}"
+                                     responsiveLayout="scroll">
+
+                            <p:column id="idColumn" headerText="ID" sortBy="#{fox.id}" filterBy="#{fox.id}"
+                                      filterMatchMode="contains" style="width: 80px;" visible="true">
+                                <h:outputText value="#{fox.id}"/>
+                            </p:column>
+
+                            <p:column id="nameColumn" headerText="Name" sortBy="#{fox.name}"
+                                      filterBy="#{fox.name}" filterMatchMode="contains" style="width: 150px;">
+                                <h:outputText value="#{fox.name}"/>
+                            </p:column>
+
+                            <p:column id="speciesColumn" headerText="Species" sortBy="#{fox.species}"
+                                      filterBy="#{fox.species}" filterMatchMode="contains" style="width: 120px;">
+                                <h:outputText value="#{fox.species}"/>
+                            </p:column>
+
+                            <p:column id="genderColumn" headerText="Gender" sortBy="#{fox.gender}"
+                                      filterBy="#{fox.gender}" filterMatchMode="exact" style="width: 100px;">
+                                <h:outputText value="#{fox.gender}"/>
+                            </p:column>
+
+                            <p:column id="imageColumn" headerText="Image" style="width: 150px;">
+                                <h:panelGroup rendered="#{not empty fox.image}">
+                                    <h:graphicImage value="#{fox.image}"
+                                                    style="max-width: 100px; max-height: 100px; border-radius: 4px;"/>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{empty fox.image}">
+                                    <span style="color: #999;">No image</span>
+                                </h:panelGroup>
+                            </p:column>
+
+                            <p:column id="actionsColumn" headerText="Actions" style="width: 120px;">
+                                    <p:commandButton value="Delete"
+                                                     action="#{foxListBean.deleteFox(fox)}"
+                                                     update="@form"
+                                                     icon="ui-icon-trash"
+                                                     style="width: 100%; margin-bottom: 5px;">
+                                        <p:confirm header="Confirmation" message="Are you sure you want to delete this fox?"
+                                                   icon="ui-icon-alert"/>
+                                    </p:commandButton>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes"/>
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"/>
+                                </p:confirmDialog>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </h:panelGroup>
+            </div>
+        </f:view>
+    </div>
+</h:body>
+</html>

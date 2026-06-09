@@ -1,69 +1,87 @@
-#  Jakarta EE 8 Starter Boilerplate 
+# Fox Garden
 
-![compile and build](https://github.com/hantsy/jakartaee8-starter/workflows/build/badge.svg)
+A Jakarta EE 8 sample application for managing foxes.
 
-![Dockerize applications](https://github.com/hantsy/jakartaee8-starter/workflows/dockerize/badge.svg)
+The template is originally created imported from [Jakarta EE 8 Starter Boilerplate](https://github.com/hantsy/jakartaee8-starter-boilerplate) GitHub Project providing a solid base for building Java EE 8 applications. It has been customized to focus on a simple use case of managing foxes, demonstrating the core features of Jakarta EE 8 while maintaining a clean and modular architecture.
 
-![Integration Test with Arquillian Glassfish Embedded Container](https://github.com/hantsy/jakartaee8-starter/workflows/it-with-arq-glassfish-embedded/badge.svg)
-![Integration Test with Arquillian Glassfish Embedded Container](https://github.com/hantsy/jakartaee8-starter/workflows/it-with-arq-glassfish-managed/badge.svg)
+## Technology Stack
 
-![Integration Test with Arquillian OpenLiberty Managed Container](https://github.com/hantsy/jakartaee8-starter/workflows/it-with-arq-liberty-managed/badge.svg)
+* Java 11
+* Jakarta EE 8
+* JSF 2.3
+* PrimeFaces 12
+* JPA (Hibernate)
+* H2 Database
+* EJB
+* JAX-RS
+* Maven
+* Docker & Docker Compose
 
-![Integration Test with Arquillian Payara Embedded Container](https://github.com/hantsy/jakartaee8-starter/workflows/it-with-arq-payara-embedded/badge.svg)
-![Integration Test with Arquillian Payara Managed Container](https://github.com/hantsy/jakartaee8-starter/workflows/it-with-arq-payara-managed/badge.svg)
-![Integration Test with Arquillian Payara Micro Container](https://github.com/hantsy/jakartaee8-starter/workflows/it-with-arq-payara-micro/badge.svg)
+## Getting Started
 
-![Integration Test with Arquillian WildFly Embedded Container](https://github.com/hantsy/jakartaee8-starter/workflows/it-with-arq-wildfly-embedded/badge.svg)
-![Integration Test with Arquillian WildFly Managed Container](https://github.com/hantsy/jakartaee8-starter/workflows/it-with-arq-wildfly-managed/badge.svg)
+### Build
 
-
-## What is it?
-
- [Jakarta EE 8 starter](https://github.com/hantsy/jakartaee8-starter) is a boilerplate project to help you to bootstrap a new  Java EE 8/Jakarta EE 8 application in seconds.
-
-If you want to explore the real world Jakarta EE 8 applications based on JSF, JAX-RS and MVC, check the following projects which are derived from this project.
-
-* [Jakarta Faces Sample](https://github.com/hantsy/jakartaee-faces-sample)
-* [Jakarta MVC  Sample](https://github.com/hantsy/jakartaee-mvc-sample)
-* [Jakarta Jaxrs  Sample](https://github.com/hantsy/jakartaee-jaxrs-sample)
-
-
-## Build
-
-Make sure you have installed the latest JDK 8 and Apache Maven 3.6.
-
-Execute the following command to build a clean package locally.
+Build the application using Maven:
 
 ```bash
 mvn clean package
 ```
-More details of testing and further deployments on application severs, check the [docs](https://hantsy.github.io/jakartaee8-starter-boilerplate/).
 
-## Docs
+### Run with Docker
 
-There is  [a comprehensive setup guide](https://hantsy.github.io/jakartaee8-starter-boilerplate/) available for the Jakarta EE newbies, including:
+Start the alternative Application Servers using Docker with provided Docker Compose configuration:
 
-1. Setup local development environment with the popular IDEs, such as:
-   * Apache NetBeans IDE
-   * Eclipse IDE
-   * IntelliJ IDEA.
-2. Deploy and Run application on the popular application servers, such as:
-   * Glassfish
-   * WildFly
-   * Open Liberty
-3. Testing Jakarta components using Junit and JBoss Arquillian.
-4. Publish application into production environment.
+```bash
+docker compose up --build
+```
 
+Run a specific application server:
 
-## Resources 
+| Application Server | Command                                     |
+|--------------------|---------------------------------------------|
+| Wildfly            | ```docker compose up --build wildfly```     |
+| TomEE WebProfile   | ```docker compose up --build tomee```       |
+| TomEE MicroProfile | ```docker compose up --build tomee_micro``` |
 
-* [WildFly Maven Plugin (wildfly-maven-plugin)](https://docs.jboss.org/wildfly/plugins/maven/latest/index.html)
-* [Deploying to Payara Server Using the Maven Cargo Plugin](https://blog.payara.fish/deploying-to-payara-server-using-the-maven-cargo-plugin)  by Payara Blog
-* [Cargo Maven2 Plugin for Glassfish v5](https://codehaus-cargo.github.io/cargo/GlassFish+5.x.html)
-* [Video course on efficient enterprise testing](https://blog.sebastian-daschner.com/entries/efficient-testing-video-course)
-* [Testing Java EE 7 Applications in Docker with Arquillian-Cube](https://blogs.oracle.com/developers/testing-java-ee-7-applications-in-docker-with-arquillian-cube)
-* [Testing HTML and JSF-Based UIs with Arquillian](https://blogs.oracle.com/javamagazine/testing-html-and-jsf-based-uis-with-arquillian)
-* [Jakarta EE & Wildfly Running on Kubernetes](https://dzone.com/articles/jakarta-ee-amp-wildfly-running-on-kubernetes#)
-* [Building Self-Contained and Configurable Java EE Applications](http://dplatz.de/blog/2018/self-contained-jee-app.html)
-* [Switching between data sources when using @DataSourceDefinition](http://jdevelopment.nl/switching-data-sources-datasourcedefinition/)
-* [The state of @DataSourceDefinition in Java EE](https://henk53.wordpress.com/2012/06/30/the-state-of-datasourcedefinition-in-java-ee/)
+### Application URLs
+
+| Service  | URL                                                  |
+| -------- | ---------------------------------------------------- |
+| Web UI   | http://localhost:8080/jakartaee8-starter/index.jsf   |
+| REST API | http://localhost:8080/jakartaee8-starter/api         |
+| OpenAPI  | http://localhost:8080/jakartaee8-starter/api/openapi |
+
+## API Examples
+
+The project includes ready‑to‑use Postman collections for exploring the REST API.
+
+### Postman Collections
+
+| Description                  | File Path                                           |
+|------------------------------|-----------------------------------------------------|
+| API Endpoints Collection     | docs/postman_collection/fox-garden.json             |
+| Environment Variables (port) | docs/postman_collection/fox-garden-environment.json |
+
+Both files can be directly imported into Postman or any compatible REST client.
+
+### Collection Contents
+
+The collection includes example requests for:
+
+* ```GET /api/foxes``` – list all foxes
+* ```GET /api/foxes/{id}``` – retrieve a fox by ID
+* ```POST /api/foxes``` – create a new fox
+* ```DELETE /api/foxes/{id}``` – remove a fox
+* ```GET /api/openapi``` – retrieves the OpenAPI specification for the REST API
+
+## Testing
+
+Run all Unit Tests:
+
+```bash
+mvn clean test
+```
+
+## Contributing
+
+Contributions are welcome by hiring me as a coworker.
