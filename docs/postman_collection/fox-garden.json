@@ -1,0 +1,154 @@
+{
+  "info": {
+    "name": "fox-garden",
+    "description": null,
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "All",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http://localhost:{{port_wf}}/jakartaee8-starter/api/fox/all",
+          "protocol": "http",
+          "host": [
+            "localhost:{{port_wf}}"
+          ],
+          "path": [
+            "jakartaee8-starter",
+            "api",
+            "fox",
+            "all"
+          ],
+          "query": [],
+          "variable": []
+        }
+      }
+    },
+    {
+      "name": "Get ById",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http://localhost:{{port_wf}}/jakartaee8-starter/api/fox/2",
+          "protocol": "http",
+          "host": [
+            "localhost:{{port_wf}}"
+          ],
+          "path": [
+            "jakartaee8-starter",
+            "api",
+            "fox",
+            "2"
+          ],
+          "query": [],
+          "variable": []
+        }
+      }
+    },
+    {
+      "name": "Create",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http://localhost:{{port_wf}}/jakartaee8-starter/api/fox/",
+          "protocol": "http",
+          "host": [
+            "localhost:{{port_wf}}"
+          ],
+          "path": [
+            "jakartaee8-starter",
+            "api",
+            "fox",
+            ""
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Foxy1\",\n  \"species\": \"Whatever\",\n  \"gender\": \"MALE\",\n  \"image\": null\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Delete ById",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http://localhost:{{port_wf}}/jakartaee8-starter/api/fox/3",
+          "protocol": "http",
+          "host": [
+            "localhost:{{port_wf}}"
+          ],
+          "path": [
+            "jakartaee8-starter",
+            "api",
+            "fox",
+            "3"
+          ],
+          "query": [],
+          "variable": []
+        }
+      }
+    },
+    {
+      "name": "OpenApi Docs",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http://localhost:{{port_wf}}/jakartaee8-starter/api/openapi",
+          "protocol": "http",
+          "host": [
+            "localhost:{{port_wf}}"
+          ],
+          "path": [
+            "jakartaee8-starter",
+            "api",
+            "openapi"
+          ],
+          "query": [],
+          "variable": []
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "port_wf",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
