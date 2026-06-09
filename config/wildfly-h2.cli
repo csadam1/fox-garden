@@ -1,0 +1,12 @@
+embed-server --std-out=echo
+
+/subsystem=datasources/data-source=FoxDS:add( \
+    jndi-name="java:/jdbc/FoxDS", \
+    driver-name="h2", \
+    connection-url="jdbc:h2:mem:foxes;DB_CLOSE_DELAY=-1", \
+    user-name="sa", \
+    password="sa", \
+    enabled=true \
+)
+
+stop-embedded-server

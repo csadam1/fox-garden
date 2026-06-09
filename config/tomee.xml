@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomee>
+    <Resource id="FoxDS" type="javax.sql.DataSource">
+        JdbcDriver=org.h2.Driver
+        JdbcUrl=jdbc:h2:mem:foxes;DB_CLOSE_DELAY=-1
+        UserName=sa
+        Password=sa
+        JtaManaged=true
+    </Resource>
+
+    <Resource id="java:/jdbc/FoxDS" type="javax.sql.DataSource">
+        ResourceId=FoxDS
+    </Resource>
+</tomee>
