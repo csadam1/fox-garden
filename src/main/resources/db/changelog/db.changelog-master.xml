@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+          http://www.liquibase.org/xml/ns/dbchangelog
+          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <!-- Create sequence -->
+    <changeSet id="1-create-sequence" author="adam">
+        <createSequence
+                sequenceName="fox_seq"
+                startValue="4"
+                incrementBy="1"/>
+    </changeSet>
+
+    <!-- Create table -->
+    <changeSet id="2-create-fox-table" author="adam">
+        <createTable tableName="Fox">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="species" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gender" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image" type="CLOB"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Initial data -->
+    <changeSet id="3-insert-initial-foxes" author="adam">
+        <insert tableName="Fox">
+            <column name="id" valueNumeric="1"/>
+            <column name="name" value="Reddy"/>
+            <column name="species" value="Red Fox"/>
+            <column name="gender" value="MALE"/>
+            <column name="image" value=""/>
+        </insert>
+
+        <insert tableName="Fox">
+            <column name="id" valueNumeric="2"/>
+            <column name="name" value="Sylva"/>
+            <column name="species" value="Silver Fox"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="image" value="https://randomfox.ca/images/46.jpg"/>
+        </insert>
+
+        <insert tableName="Fox">
+            <column name="id" valueNumeric="3"/>
+            <column name="name" value="Artie"/>
+            <column name="species" value="Arctic Fox"/>
+            <column name="gender" value="MALE"/>
+            <column name="image" value=""/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
