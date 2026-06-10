@@ -15,6 +15,7 @@ The template is originally created imported from [Jakarta EE 8 Starter Boilerpla
 * EJB
 * JAX-RS
 * Maven
+* Liquibase
 * Docker & Docker Compose
 
 ## Getting Started
@@ -50,6 +51,14 @@ Run a specific application server:
 | Web UI   | http://localhost:8080/jakartaee8-starter/index.jsf   |
 | REST API | http://localhost:8080/jakartaee8-starter/api         |
 | OpenAPI  | http://localhost:8080/jakartaee8-starter/api/openapi |
+
+
+### Note
+
+> [!NOTE]
+> If you want to run the application server with Liquibase, switch to [`feature/LIQUIBASE-POC`](https://github.com/csadam1/fox-garden/tree/feature/LIQUIBASE-POC) branch.
+>
+> This ensures that the TomEE Application Server continues to work while the Wildfly H2 database schema is initialized correctly. The branch contains the experimental Liquibase integration and focuses on enabling Liquibase for database schema change management.
 
 ## API Examples
 
